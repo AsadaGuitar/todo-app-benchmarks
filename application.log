@@ -1,0 +1,13 @@
+03:17:11 [INFO] Starting server on http://127.0.0.1:8080
+03:17:11 [INFO] Starting 8 workers
+03:17:11 [INFO] Actix runtime found; starting in Actix runtime
+03:18:13 [INFO] SIGINT received; starting forced shutdown
+03:18:13 [INFO] Accept thread stopped
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
+03:18:13 [INFO] Shutting down idle worker
