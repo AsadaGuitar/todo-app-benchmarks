@@ -1,4 +1,4 @@
-# todo-benchmark
+# todo-app-benchmarks
 <img src="https://img.shields.io/badge/build-passed-red?" /> <img src="https://img.shields.io/badge/Rust-1.64.0-red?logo=rust" />
 <br>
 Todo application for benchmarking.<br>
