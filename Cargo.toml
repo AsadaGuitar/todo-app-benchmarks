@@ -1,5 +1,5 @@
 [package]
-name = "todo-benchmark"
+name = "todo-app-benchmarks"
 version = "0.1.0"
 edition = "2021"
 
