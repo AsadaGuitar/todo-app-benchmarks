@@ -5,8 +5,10 @@ Todo application for benchmarking.<br>
 Benchmarks are obtained for server counts 1-3.
 
 ## Feature
-+ Rust-1.64.0
-+ AWS (EC2)
++ REST API
++ Rust ver.1.64.0
++ actix-web ver.4
++ AWS (EC2, ELB, RDS)
 
 ## BenchMark
 ### Graph

@@ -2,7 +2,7 @@ use actix_web::{App, HttpServer};
 use config::Config;
 use std::fs::File;
 
-mod adapter;
+mod routes;
 
 fn init_logger(){
     simplelog::CombinedLogger::init(vec![
@@ -38,11 +38,11 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .service(adapter::routes::list)
-            .service(adapter::routes::post)
-            .service(adapter::routes::details)
-            .service(adapter::routes::update)
-            .service(adapter::routes::delete)
+            .service(routes::list)
+            .service(routes::post)
+            .service(routes::details)
+            .service(routes::update)
+            .service(routes::delete)
     })
     .bind((host, port))
     .expect(&format!("Failed open port to {}", port))
