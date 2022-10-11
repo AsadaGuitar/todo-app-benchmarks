@@ -14,7 +14,7 @@ fn init_logger(){
         simplelog::WriteLogger::new(
             simplelog::LevelFilter::Info,
             simplelog::Config::default(),
-            File::create("application.log").unwrap(),
+            File::create("./logs/application.log").unwrap(),
         ),
     ])
     .unwrap();
