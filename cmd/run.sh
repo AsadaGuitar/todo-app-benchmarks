@@ -1,1 +1,0 @@
-docker-compose exec rust-app cargo run -v

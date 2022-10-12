@@ -12,22 +12,30 @@ CREATE TABLE IF NOT EXISTS tasks(
         REFERENCES user_accounts(id) 
 );
 
-INSERT INTO tasks(id, user_id, title, details) VALUES
-(
+BEGIN;
+
+INSERT INTO tasks(id, user_id, title, details)
+SELECT 
     'sEUMhpeeNOyu',
     'mNXpMugRoTXI',
     'Reservations for Year-End Party',
     'Book a year-end party for your company. Number of people: 20'
-),
-(
+WHERE NOT EXISTS (SELECT * FROM tasks WHERE id = 'sEUMhpeeNOyu');
+
+INSERT INTO tasks(id, user_id, title, details)
+SELECT 
     'YByqkuBkOTOT',
     'PfTTSONBySjb',
     'Create an HP website',
     'Create a website site for Sample Inc.'
-),
-(
+WHERE NOT EXISTS (SELECT * FROM tasks WHERE id = 'YByqkuBkOTOT');
+
+INSERT INTO tasks(id, user_id, title, details)
+SELECT 
     'ncNQubXmBkLH',
     'QHkaQGYwuRFc',
     'Clean up the room',
     'I have a friend coming over tomorrow.'
-);
+WHERE NOT EXISTS (SELECT * FROM tasks WHERE id = 'ncNQubXmBkLH');
+
+COMMIT;

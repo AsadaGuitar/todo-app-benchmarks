@@ -9,19 +9,27 @@ CREATE TABLE IF NOT EXISTS user_accounts(
     PRIMARY KEY(id)
 );
 
-INSERT INTO user_accounts(id, name, password) VALUES 
-(
+BEGIN;
+
+INSERT INTO user_accounts(id, name, password)
+SELECT 
     'mNXpMugRoTXI',
     'user_1',
     'user_1_password'
-), 
-(
+WHERE NOT EXISTS (SELECT * FROM user_accounts WHERE id = 'mNXpMugRoTXI');
+
+INSERT INTO user_accounts(id, name, password)
+SELECT 
     'PfTTSONBySjb',
     'user_2',
     'user_2_password'
-),
-(
+WHERE NOT EXISTS (SELECT * FROM user_accounts WHERE id = 'PfTTSONBySjb');
+
+INSERT INTO user_accounts(id, name, password)
+SELECT 
     'QHkaQGYwuRFc',
     'user_3',
     'user_3_password'
-);
+WHERE NOT EXISTS (SELECT * FROM user_accounts WHERE id = 'QHkaQGYwuRFc');
+
+COMMIT;

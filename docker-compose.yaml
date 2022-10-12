@@ -3,13 +3,14 @@ services:
   rust-app:
     container_name: rust-app
     build: .
-    tty: true
     volumes:
       - ../todo_app_benchmarks:/work/app
     ports:
       - 8080:8080
     networks:
       - todo-app
+    tty: true
+    restart: always
   postgresql:
     image: postgres:14
     container_name: postgresql
@@ -21,12 +22,13 @@ services:
       - POSTGRES_PASSWORD=passw0rd
       - POSTGRES_USER=developer
       - POSTGRES_DB=todo
-    restart: always
     networks:
       - todo-app
+    tty: true
+    restart: always
 volumes:
   db-store:
 networks:
-  # $ docker network create todo-app
   todo-app:
-    external: true
+    name: todo-app
+    driver: bridge
