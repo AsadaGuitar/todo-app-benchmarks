@@ -7,11 +7,8 @@ use crate::schema::tasks;
 #[table_name = "user_accounts"]
 pub struct UserAccounts {
     pub id: String,
-    pub name: String,
-    pub password: String,
     pub close: bool,
     pub create_at: DateTime<Utc>,
-    pub modify_at: Option<DateTime<Utc>>,
     pub close_at: Option<DateTime<Utc>>
 }   
 
@@ -21,7 +18,6 @@ pub struct Tasks {
     pub id: String,
     pub user_id: String,
     pub title: String,
-    pub details: Option<String>,
     pub close: bool,
     pub create_at: DateTime<Utc>,
     pub modify_at: Option<DateTime<Utc>>,

@@ -3,7 +3,6 @@ table! {
         id -> Varchar,
         user_id -> Varchar,
         title -> Varchar,
-        details -> Nullable<Text>,
         close -> Bool,
         create_at -> Timestamptz,
         modify_at -> Nullable<Timestamptz>,
@@ -14,11 +13,8 @@ table! {
 table! {
     user_accounts (id) {
         id -> Varchar,
-        name -> Varchar,
-        password -> Varchar,
         close -> Bool,
         create_at -> Timestamptz,
-        modify_at -> Nullable<Timestamptz>,
         close_at -> Nullable<Timestamptz>,
     }
 }
