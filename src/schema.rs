@@ -1,4 +1,6 @@
-table! {
+// @generated automatically by Diesel CLI.
+
+diesel::table! {
     tasks (id) {
         id -> Varchar,
         user_id -> Varchar,
@@ -10,7 +12,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     user_accounts (id) {
         id -> Varchar,
         close -> Bool,
@@ -19,9 +21,9 @@ table! {
     }
 }
 
-joinable!(tasks -> user_accounts (user_id));
+diesel::joinable!(tasks -> user_accounts (user_id));
 
-allow_tables_to_appear_in_same_query!(
+diesel::allow_tables_to_appear_in_same_query!(
     tasks,
     user_accounts,
 );

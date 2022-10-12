@@ -11,4 +11,6 @@ RUN apt-get update \
 
 RUN rustup default nightly && rustup update
 
+RUN cargo install diesel_cli
+
 WORKDIR /work/app

@@ -32,6 +32,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(todo_app_benchmarks::routes::list)
+            .service(todo_app_benchmarks::routes::create_user_account)
             .service(todo_app_benchmarks::routes::post)
             .service(todo_app_benchmarks::routes::details)
             .service(todo_app_benchmarks::routes::update)

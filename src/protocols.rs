@@ -3,10 +3,18 @@ use serde::{Serialize, Deserialize};
 use crate::models::Tasks;
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct CreateUserAccountResponseJson {
+    pub id: String,
+    pub user_id: String,
+    pub create_at: DateTime<Utc>,
+    pub time_zone: String
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct FindAllTasksResponseJson {
     pub id: String,
     pub user_id: String,
-    pub tasks: Vec<Tasks>,
+    pub tasks: Vec<String>,
     pub create_at: DateTime<Utc>,
     pub time_zone: String
 }

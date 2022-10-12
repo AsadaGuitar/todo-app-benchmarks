@@ -1,9 +1,10 @@
-13:24:21 [INFO] Starting server on http://0.0.0.0:8080
-13:24:21 [INFO] Starting 4 workers
-13:24:21 [INFO] Actix runtime found; starting in Actix runtime
-13:39:00 [INFO] SIGINT received; starting forced shutdown
-13:39:00 [INFO] Accept thread stopped
-13:39:00 [INFO] Shutting down idle worker
-13:39:00 [INFO] Shutting down idle worker
-13:39:00 [INFO] Shutting down idle worker
-13:39:00 [INFO] Shutting down idle worker
+20:46:16 [INFO] Starting server on http://0.0.0.0:8080
+20:46:16 [INFO] Starting 4 workers
+20:46:16 [INFO] Actix runtime found; starting in Actix runtime
+20:54:16 [WARN] A reference to a non-existent task has occurred. user_id=CFLBMHTMUZCG, task_id=1444a869-998
+20:54:47 [INFO] SIGINT received; starting forced shutdown
+20:54:47 [INFO] Accept thread stopped
+20:54:47 [INFO] Shutting down idle worker
+20:54:47 [INFO] Shutting down idle worker
+20:54:47 [INFO] Shutting down idle worker
+20:54:47 [INFO] Shutting down idle worker

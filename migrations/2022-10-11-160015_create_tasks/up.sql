@@ -13,21 +13,21 @@ CREATE TABLE IF NOT EXISTS tasks(
 
 BEGIN;
 
-INSERT INTO tasks(id, user_id, title, details)
+INSERT INTO tasks(id, user_id, title)
 SELECT 
     'sEUMhpeeNOyu',
     'mNXpMugRoTXI',
     'Reservations for Year-End Party'
 WHERE NOT EXISTS (SELECT * FROM tasks WHERE id = 'sEUMhpeeNOyu');
 
-INSERT INTO tasks(id, user_id, title, details)
+INSERT INTO tasks(id, user_id, title)
 SELECT 
     'YByqkuBkOTOT',
     'PfTTSONBySjb',
     'Create an HP website'
 WHERE NOT EXISTS (SELECT * FROM tasks WHERE id = 'YByqkuBkOTOT');
 
-INSERT INTO tasks(id, user_id, title, details)
+INSERT INTO tasks(id, user_id, title)
 SELECT 
     'ncNQubXmBkLH',
     'QHkaQGYwuRFc',
