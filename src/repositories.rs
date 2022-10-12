@@ -1,3 +1,4 @@
+use chrono::Utc;
 use diesel::prelude::*;
 use crate::models::{UserAccounts, Tasks};
 use crate::schema::{user_accounts, tasks};
@@ -20,10 +21,12 @@ pub fn update_task(conn: &mut PgConnection, task: Tasks) -> Tasks {
     diesel::update(
         tasks::dsl::tasks
             .filter(tasks::id.eq(task.id))
-            .filter(tasks::user_id.eq(task.user_id)))        
-            .set((tasks::title.eq(task.title), tasks::modify_at.eq(task.modify_at)))
-            .get_result(conn)
-            .expect("Error udpating tasks")
+            .filter(tasks::user_id.eq(task.user_id))
+            .filter(tasks::close.eq(false))
+    )
+        .set((tasks::title.eq(task.title), tasks::modify_at.eq(task.modify_at)))
+        .get_result(conn)
+        .expect("Error udpating tasks")
 }
 
 pub fn find_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) -> Option<Tasks> {
@@ -45,10 +48,14 @@ pub fn find_all_tasks_by_user_id(conn: &mut PgConnection, user_id: &str) -> Vec<
         .expect("Error loading tasks")
 }
 
-pub fn delete_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) -> usize {
-    diesel::delete(
+pub fn delete_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) -> Tasks {
+    diesel::update(
         tasks::dsl::tasks
             .filter(tasks::id.eq(task_id))
             .filter(tasks::user_id.eq(user_id))
-    ).execute(conn).expect("Error deleting tasks.")
+            .filter(tasks::close.eq(false))
+    )
+        .set((tasks::close.eq(true), tasks::close_at.eq(Some(Utc::now()))))
+        .get_result(conn)
+        .expect("Error deleting tasks.")
 }

@@ -125,19 +125,15 @@ async fn delete(path: web::Path<(String, String)>) -> impl Responder {
     if tasks_len < 1 {
         HttpResponse::BadRequest().body("Not exists users tasks.")
     } else {
-        let deleted = repositories::delete_task_by_id(&mut conn, &user_id, &task_id);
-        if (tasks_len - 1) == deleted {
-            let response = protocols::DeleteTaskResponseJson {
-                id: Uuid::new_v4().to_hyphenated().to_string(),
-                user_id: user_id,
-                task_id: task_id,
-                create_at: Utc::now(),
-                time_zone: String::from("utc")
-            };
-            let json = serde_json::to_string(&response).unwrap();
-            HttpResponse::Ok().body(json)
-        } else {
-            HttpResponse::NotFound().body(format!("Not found task {}.", task_id))
-        }
+        repositories::delete_task_by_id(&mut conn, &user_id, &task_id);
+        let response = protocols::DeleteTaskResponseJson {
+            id: Uuid::new_v4().to_hyphenated().to_string(),
+            user_id: user_id,
+            task_id: task_id,
+            create_at: Utc::now(),
+            time_zone: String::from("utc")
+        };
+        let json = serde_json::to_string(&response).unwrap();
+        HttpResponse::Ok().body(json)
     }
 }
