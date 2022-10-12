@@ -45,8 +45,8 @@ async fn post(path: web::Path<(String,)>, request_json: web::Json<protocols::Pos
     let inserted = repositories::insert_task(&mut conn, task);
     let response = protocols::PostTaskResponseJson {
         id: Uuid::new_v4().to_hyphenated().to_string(),
-        task_id: task_id.to_string(),
         user_id: user_id.to_string(),
+        task_id: task_id.to_string(),
         title: inserted.title,
         create_at: create_at,
         time_zone: "utc".to_string()
@@ -76,7 +76,7 @@ async fn details(path: web::Path<(String,String)>) -> impl Responder {
         None => HttpResponse::NotFound().body(format!("Not found task {}", task_id.to_string()))
     }
 }
-    
+
 #[put("/{user_id}/task/{id}")]
 async fn update(path: web::Path<(String, String)>, request_json: web::Json<protocols::UpdateTaskRequestJson>) -> impl Responder {
     // update task
@@ -103,6 +103,7 @@ async fn update(path: web::Path<(String, String)>, request_json: web::Json<proto
 
             let response = protocols::UpdateTaskResponseJson {
                 id: Uuid::new_v4().to_hyphenated().to_string(),
+                user_id: user_id,
                 task: updated,
                 create_at: Utc::now(),
                 time_zone: String::from("utc")
@@ -115,7 +116,28 @@ async fn update(path: web::Path<(String, String)>, request_json: web::Json<proto
 }
 
 #[delete("/{user_id}/task/{id}")]
-async fn delete() -> impl Responder { 
+async fn delete(path: web::Path<(String, String)>) -> impl Responder { 
     // delete task
-    HttpResponse::Ok().body("Hello world!")
+    let (user_id, task_id) = path.into_inner();
+    let mut conn = db::establish_connection();
+    
+    let tasks_len = repositories::find_all_tasks_by_user_id(&mut conn, &user_id).len();
+    if tasks_len < 1 {
+        HttpResponse::BadRequest().body("Not exists users tasks.")
+    } else {
+        let deleted = repositories::delete_task_by_id(&mut conn, &user_id, &task_id);
+        if (tasks_len - 1) == deleted {
+            let response = protocols::DeleteTaskResponseJson {
+                id: Uuid::new_v4().to_hyphenated().to_string(),
+                user_id: user_id,
+                task_id: task_id,
+                create_at: Utc::now(),
+                time_zone: String::from("utc")
+            };
+            let json = serde_json::to_string(&response).unwrap();
+            HttpResponse::Ok().body(json)
+        } else {
+            HttpResponse::NotFound().body(format!("Not found task {}.", task_id))
+        }
+    }
 }

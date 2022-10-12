@@ -23,7 +23,7 @@ pub fn update_task(conn: &mut PgConnection, task: Tasks) -> Tasks {
             .filter(tasks::user_id.eq(task.user_id)))        
             .set((tasks::title.eq(task.title), tasks::modify_at.eq(task.modify_at)))
             .get_result(conn)
-            .expect("Error loading tasks")
+            .expect("Error udpating tasks")
 }
 
 pub fn find_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) -> Option<Tasks> {
@@ -37,10 +37,18 @@ pub fn find_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) ->
         .expect("Error loading tasks")
 }
 
-pub fn find_all_tasks_by_user_id(conn: &mut PgConnection, id: &str) -> Vec<Tasks> {
+pub fn find_all_tasks_by_user_id(conn: &mut PgConnection, user_id: &str) -> Vec<Tasks> {
     tasks::dsl::tasks
-        .filter(tasks::user_id.eq(id))
+        .filter(tasks::user_id.eq(user_id))
         .filter(tasks::close.eq(false))
         .load::<Tasks>(conn)
         .expect("Error loading tasks")
+}
+
+pub fn delete_task_by_id(conn: &mut PgConnection, user_id: &str, task_id: &str) -> usize {
+    diesel::delete(
+        tasks::dsl::tasks
+            .filter(tasks::id.eq(task_id))
+            .filter(tasks::user_id.eq(user_id))
+    ).execute(conn).expect("Error deleting tasks.")
 }

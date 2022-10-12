@@ -28,8 +28,8 @@ pub struct PostTaskRequestJson {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PostTaskResponseJson {
     pub id: String,
-    pub task_id: String,
     pub user_id: String,
+    pub task_id: String,
     pub title: String,
     pub create_at: DateTime<Utc>,
     pub time_zone: String
@@ -43,7 +43,17 @@ pub struct UpdateTaskRequestJson {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UpdateTaskResponseJson {
     pub id: String,
+    pub user_id: String,
     pub task: Tasks,
+    pub create_at: DateTime<Utc>,
+    pub time_zone: String
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct DeleteTaskResponseJson {
+    pub id: String,
+    pub user_id: String,
+    pub task_id: String,
     pub create_at: DateTime<Utc>,
     pub time_zone: String
 }
